@@ -1,0 +1,16 @@
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Quick Form - FastEasyApplicationCreator</title>
+        <?php echo $this->headLink()->appendStylesheet('/extjs/resources/css/ext-all.css')
+                                    ->appendStylesheet('/extjs/resources/css/xtheme-gray.css');
+              echo $this->headScript()->appendFile('/js/jquery.js')
+                                      ->appendFile('/extjs/adapter/jquery/ext-jquery-adapter.js')
+                                      ->appendFile('/extjs/ext-all.js');
+        ?>
+    </head>
+    <body>
+        <?php echo $this->layout()->content ?>
+    </body>
+</html>
