@@ -4,9 +4,15 @@ var login = function(){
     if(form.getForm().isValid()){
         form.getForm().submit({
           url:'qform/loginSubmit',
-          success:function(r){
+          success:function(f,r){
+               document.location.href = 'qform/qform';
+          },
+          failure:function(f,r){
+              Ext.Msg.alert('{_WARNING}',r.result.msg,function(){
+                  form.get(1).focus().selectText();
+              });
               
-          }   
+          }
         });
     }
 }
@@ -36,14 +42,16 @@ new Ext.Viewport({
               xtype:'textfield',
               anchor:'0',
               allowBlank:false,
-              name:'username'
+              name:'username',
+              value:'Admin'
            },{
               fieldLabel:'{_PASSWORD}',
               xtype:'textfield',
               anchor:'0',
               inputType:'password',
               allowBlank:false,
-              name:'password'
+              name:'password',
+              value:'dupa'
            }],
            buttons:[{
                text:'{_LOGIN}',
