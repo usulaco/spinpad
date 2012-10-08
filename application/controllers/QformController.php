@@ -1,44 +1,83 @@
 <?php
 
 class QformController extends Zend_Controller_Action {
-
+    public function lang($string,$ident='en'){
+        return $string;
+    } 
     public function init() {
         /*
-         * load QForm Login
+         *  init QFormDB
          */
-        $this->loginProc = new Application_Model_QFormLogin();
+        $this->QFormDB = new Application_Model_QformDB();
+        /*
+         *  if not login redirect to login page 
+         */
+        $auth = Zend_Auth::getInstance();
+        if (!$auth->hasIdentity()) {
+            if (!in_array($this->_request->getRequestUri(), Array('/qform/login', '/qform/loginSubmit')))
+                $this->_redirect('/qform/login');
+        }
+        /*
+         * 
+         */
+        $this->QFormLogin = new Application_Model_QFormLogin();
         $this->_helper->layout()->setLayout('qform');
         if ($this->_request->isXmlHttpRequest()) {
             $this->_helper->layout->disableLayout();
             $this->_helper->viewRenderer->setNoRender(TRUE);
         } else {
+            //echo ($this->_request->getRequestUri());
             $this->view->config = (object) $this->getInvokeArg('bootstrap')->getOptions()['qform'];
         }
     }
 
-    public function loginsubmitAction() {
-        $user = $this->loginProc->loginCheck($_REQUEST['username'],$_REQUEST['password']);
-        if(count($user) > 0) {
-           //$session = new Zend_Session_Namespace('qform_user');
-           //$session->user = (object) $user[0];
-           echo '{"success":true,"username":"'.$user[0]['username'].'"}';
-        } else {
-           //$session = new Zend_Session_Namespace('qform_user');
-           //$session->user = (object) Array();
-           echo '{"success":false, "msg":"{_LOGIN_OR_PASSWORD_ERROR}"}'; 
-        }
-    }
+    /*
+     * main layout creator
+     */
 
     public function indexAction() {
+        echo '<a href="/qform/logout">'.$this->lang('{_LOGOUT}').'</a>'; 
+    }
+
+    /*
+     *  ajax action dispacher
+     */
+
+    public function qformAction() {
         
     }
 
-    public function qformAction() {
-        //ebug(new Zend_Session_Namespace('qform_user'));
+    /*
+     * login page creator
+     */
+
+    public function loginAction() {
+        
     }
+
+    /*
+     * admin function dispacher
+     */
 
     public function adminAction() {
         
+    }
+
+    /*
+     * Ajax Login Action
+     */
+
+    public function loginsubmitAction() {
+        echo $this->QFormLogin->login($this->_request->getPost('username'), $this->_request->getPost('password'));
+    }
+
+    /*
+     * Logout Action
+     */
+
+    public function logoutAction() {
+        $this->QFormLogin->logout();
+        $this->_redirect('/qform');
     }
 
 }

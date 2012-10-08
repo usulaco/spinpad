@@ -1,0 +1,76 @@
+<script>
+var login = function(){
+    var form = this.ownerCt.ownerCt;
+    if(form.getForm().isValid()){
+        form.getForm().submit({
+          url:'loginSubmit',
+          success:function(f,r){
+              if(r.result.success)
+               document.location.href = '/qform';
+          },
+          failure:function(f,r){
+              Ext.Msg.alert('{_WARNING}',r.result.msg,function(){
+                  form.get(1).focus().selectText();
+              });
+              
+          }
+        });
+    }
+}
+new Ext.Viewport({
+    layout: 'border',
+    items:[{
+       region:'north',
+       height:100     
+    },{
+        region:'west',
+        width:250,
+        title:'{_MENU}',
+        layout:'vbox',
+        layoutConfig:{
+           align:'stretch',
+           pack:'end'
+        },
+        items:[{
+           title:'{_LOGIN}',
+           xtype:'form',
+           height:130,
+           border:false,
+           layout:'form',
+           padding:5,
+           items:[{
+              fieldLabel:'{_USERNAME}',
+              xtype:'textfield',
+              anchor:'0',
+              allowBlank:false,
+              name:'username',
+              value:'Admin'
+           },{
+              fieldLabel:'{_PASSWORD}',
+              xtype:'textfield',
+              anchor:'0',
+              inputType:'password',
+              allowBlank:false,
+              name:'password',
+              value:'dupa'
+           }],
+           buttons:[{
+               text:'{_LOGIN}',
+               handler: login
+           }]
+        }]
+    },{
+        region:'center'
+    },{
+        region:'south',
+        height:20,
+        style:{
+          'display':'table-cell',
+          'text-align':'center',
+          'vertical-align':'middle'
+        },
+        html: '<div>QForm</div>'
+    }]
+});
+
+</script>

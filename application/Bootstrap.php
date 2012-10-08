@@ -21,7 +21,7 @@ function ebug($object){
     break;
    } 
    
-   echo  $dp ;
+   echo  nl2br($dp) ;
 }
 class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 {
