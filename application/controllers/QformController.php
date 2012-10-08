@@ -2,6 +2,7 @@
 
 class QformController extends Zend_Controller_Action {
     public function lang($string,$ident='en'){
+       //$this->QFormDB->query("SELECT * FROM lang WHERE lang_ident='' AND keyword = '".$keyword."'")[0]['lang_translation'];
         return $string;
     } 
     public function init() {
