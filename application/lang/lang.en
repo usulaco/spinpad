@@ -1,0 +1,58 @@
+{_LOGIN}:Login
+{_LOGOUT}:Logout
+{_APPLICATION_TITLE}:MySQL Front Web Beta
+{_SESSIONS}: Sessions
+{_CONNECTIONS}:Connections
+{_USERS}:Users
+{_STATUS}:Status
+{_VARIABLES}:Variables
+{_SQL_EDITOR}:SQL editor
+{_CONNECT}:Connect
+{_EXPLAIN}:Explain
+{_TIME}:Time
+{_TOTAL_ROWS}:Total rows
+{_USERNAME}:Username
+{_PASSWORD}:Password
+{_EXPLAIN_FOR_QUERY}:Explain for query
+{_QUERY}:Query
+{_NEW}:New
+{_EVENT}:Event
+{_TABLE}:Table
+{_FUNCTION}:Function
+{_PROCEDURE}:Procedure
+{_USER}:User
+{_TODO}:Todo
+{_EDIT}:Edit
+{_DROP}:Drop
+{_SHOW_CREATE}:Show create
+{_EXPORT}:Export
+{_FIELD}:Field
+{_INDEX}:Index
+{_TRIGGER}:Trigger
+{_TABLE_NAME}:Table name
+{_TABLE_ENGINE}:Table engine
+{_CHARACTER_SET}:Character set
+{_COLLATION}:Collation
+{_TABLE_COMMENT}:Comment
+{_FIELDS}:Fields
+{_KEYS}:Keys
+{_TABLE_CONFIGURATION}:Table configuration
+{_TABLE_EDITOR}:Table editor
+{_OK}:Ok
+{_CANCEL}:Cancel
+{_NAME}:Name
+{_TYPE}:Type
+{_NULL}:Null
+{_DEFAULT}:Default
+{_EXTRAS}:Extras
+{_COMMENT}:Comment
+{_GENERAL}:General
+{_LENGTH}:Length
+{_SEARCH}:Search
+{_DATA}:Data
+{_FILTER}:Filter
+{_BROWSE_DATA}:Data browse
+{_MENU}:Menu
+{_HOME}:Home
+{_ERROR_USERNAME_OR_PASSWORD}:Error username or password
+{_WARNING}:Warning

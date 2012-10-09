@@ -33,6 +33,7 @@ class Application_Model_QFormLogin extends Application_Model_QformDB {
     }
     public function logout(){
         Zend_Auth::getInstance()->clearIdentity();
+        session_destroy();
     }
 
 }

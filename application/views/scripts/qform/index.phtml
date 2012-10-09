@@ -1,3 +1,29 @@
 <script>
-    
+    new Ext.Viewport({
+        layout: 'border',
+        items:[{
+                id:'qform_north',
+                region:'north',
+                height:100,
+                bbar:['->',{
+                   text:'{_LOGOUT}: <?php echo $this->user->name;?>',
+                   handler: function(){document.location.href='qform/logout'}
+                }]
+            },{
+                id:'qform_west',
+                region:'west',
+                width:200,
+                split:true
+            },{
+                region:'south',
+                height:50
+            },{
+                id:'qform_center',
+                region:'center'
+            },{
+                id:'qform_east',
+                region:'east',
+                hiddent:true
+            }] 
+    });
 </script>

@@ -7,8 +7,8 @@ function ebug($object){
        foreach(get_class_methods($object) as $m){
           $dp .= "\n Method: ".$m;
        }      
-       foreach(get_object_vars($object) as $v){
-          $dp .= "\n Variables: ".$v;
+       foreach(get_object_vars($object) as $key => $v){
+          $dp .= "\n Variable ($key): ".$v;
        }
     break;
     case is_array($object):

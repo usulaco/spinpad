@@ -1,11 +1,17 @@
 <?php
 
 class QformController extends Zend_Controller_Action {
-    public function lang($string,$ident='en'){
-       //$this->QFormDB->query("SELECT * FROM lang WHERE lang_ident='' AND keyword = '".$keyword."'")[0]['lang_translation'];
+
+    public function lang($string, $ident = 'en') {
+        //$this->QFormDB->query("SELECT * FROM lang WHERE lang_ident='' AND keyword = '".$keyword."'")[0]['lang_translation'];
         return $string;
-    } 
+    }
+
     public function init() {
+        /*
+         *  initiate translation filter
+         */
+        $this->_helper->layout->getLayoutInstance()->getView()->addFilter('Lang');
         /*
          *  init QFormDB
          */
@@ -13,15 +19,21 @@ class QformController extends Zend_Controller_Action {
         /*
          *  if not login redirect to login page 
          */
-        $auth = Zend_Auth::getInstance();
-        if (!$auth->hasIdentity()) {
+        $this->auth = Zend_Auth::getInstance();
+        if (!$this->auth->hasIdentity()) {
             if (!in_array($this->_request->getRequestUri(), Array('/qform/login', '/qform/loginSubmit')))
                 $this->_redirect('/qform/login');
+        } else {
+            $this->view->user = $this->auth->getStorage()->read();
         }
+        /*
+         *  loading models 
+         */
+        $this->QFormLogin     = new Application_Model_QFormLogin();
+        $this->QFormInterface = new Application_Model_QFormLogin();
         /*
          * 
          */
-        $this->QFormLogin = new Application_Model_QFormLogin();
         $this->_helper->layout()->setLayout('qform');
         if ($this->_request->isXmlHttpRequest()) {
             $this->_helper->layout->disableLayout();
@@ -37,7 +49,7 @@ class QformController extends Zend_Controller_Action {
      */
 
     public function indexAction() {
-        echo '<a href="/qform/logout">'.$this->lang('{_LOGOUT}').'</a>'; 
+       
     }
 
     /*
@@ -65,11 +77,20 @@ class QformController extends Zend_Controller_Action {
     }
 
     /*
+     * Load menu tee 
+     */
+
+    public function loadmenuAction() {
+      return  $this->QFormInterface->getMenu($this->_request->getPost('menu_id'));
+    }
+
+    /*
      * Ajax Login Action
      */
 
     public function loginsubmitAction() {
         echo $this->QFormLogin->login($this->_request->getPost('username'), $this->_request->getPost('password'));
+        
     }
 
     /*

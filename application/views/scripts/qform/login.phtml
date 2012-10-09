@@ -55,6 +55,9 @@ new Ext.Viewport({
               value:'dupa'
            }],
            buttons:[{
+               text:'{_HOME}',
+               handler: function(){document.location.href = '/'}
+           },{
                text:'{_LOGIN}',
                handler: login
            }]
@@ -63,13 +66,16 @@ new Ext.Viewport({
         region:'center'
     },{
         region:'south',
-        height:20,
-        style:{
+        height:50,
+        bodyStyle:{
           'display':'table-cell',
           'text-align':'center',
-          'vertical-align':'middle'
+          'vertical-align':'middle',
+          'font-family':'verdana',
+          'color':'#ddd',
+          'font-size':'11px'
         },
-        html: '<div>QForm</div>'
+        html: '<div><?php echo $this->config->title; ?></div>'
     }]
 });
 
