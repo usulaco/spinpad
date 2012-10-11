@@ -36,7 +36,8 @@ class QformController extends Zend_Controller_Action {
          */
         $this->_helper->layout()->setLayout('qform');
         if ($this->_request->isXmlHttpRequest()) {
-            $this->_helper->layout->disableLayout();
+            $this->_helper->layout()->setLayout('qform_ajax');
+            //$this->_helper->layout->disableLayout();
             $this->_helper->viewRenderer->setNoRender(TRUE);
         } else {
             //echo ($this->_request->getRequestUri());
