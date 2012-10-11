@@ -29,8 +29,9 @@ class QformController extends Zend_Controller_Action {
         /*
          *  loading models 
          */
-        $this->QFormLogin     = new Application_Model_QFormLogin();
-        $this->QFormInterface = new Application_Model_QFormLogin();
+        $this->QFormLogin       = new Application_Model_QFormLogin();
+        $this->QFormInterface   = new Application_Model_QFormInterface();
+        $this->QFormJavaScript  = new Application_Model_QFormJavaScript();
         /*
          * 
          */
@@ -50,7 +51,7 @@ class QformController extends Zend_Controller_Action {
      */
 
     public function indexAction() {
-       
+        $this->view->init_javascript = $this->QFormJavaScript->getScript('init');
     }
 
     /*
@@ -86,12 +87,24 @@ class QformController extends Zend_Controller_Action {
     }
 
     /*
+     * Ajax load component
+     */
+    
+    public function loadcomponentAction(){
+       if($this->_request->isXmlHttpRequest()) 
+        echo $this->QFormJavaScript->getScript($this->_request->getPost('name'),false); 
+         else
+           throw new Zend_Controller_Action_Exception('Only ajax call allowed.', 404);
+    }
+    /*
      * Ajax Login Action
      */
 
     public function loginsubmitAction() {
+      if($this->_request->isXmlHttpRequest())
         echo $this->QFormLogin->login($this->_request->getPost('username'), $this->_request->getPost('password'));
-        
+         else
+           throw new Zend_Controller_Action_Exception('Only ajax call allowed.', 404);        
     }
 
     /*

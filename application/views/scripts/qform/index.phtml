@@ -15,15 +15,30 @@
                 width:200,
                 split:true
             },{
-                region:'south',
-                height:50
-            },{
                 id:'qform_center',
-                region:'center'
+                region:'center',
+                layout:'fit',
+                items:[{
+                 xtype: qf.load.xtype('logo'),
+                 border:false,
+                 text:'<?php echo $this->config->title; ?>'
+                }]
             },{
                 id:'qform_east',
                 region:'east',
                 hiddent:true
+            },{
+                region:'south',
+                height:50,
+                bodyStyle:{
+                  'display':'table-cell',
+                  'text-align':'center',
+                  'vertical-align':'middle',
+                  'font-family':'verdana',
+                  'color':'#ddd',
+                  'font-size':'11px'
+                },
+                html: '<div style="text-align:center;"><div style="border-radius:4px;border:1px solid #ddd;width:150px;margin:auto;"><?php echo $this->config->title; ?></div></div>'
             }] 
     });
 </script>
