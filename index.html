@@ -6,20 +6,54 @@
         <meta name="Author" content="Przemys�aw Lusina">
         <meta name="Keywords" content="">
         <meta name="Description" content="Secure PinPad">
+        <style>
+            #spp_frame {
+                -moz-box-shadow:inset 0px 0px 15px 1px rgba(119, 119, 119, 0.6);
+                -webkit-box-shadow:inset 0px 0px 15px 1px rgba(119, 119, 119, 0.6);
+                box-shadow:inset 0px 0px 15px 1px rgba(119, 119, 119, 0.6);
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                user-select: none;
+            }
+            table {
+                 -moz-user-select: none;
+                -khtml-user-select: none;
+                user-select: none;               
+            }
+            td {
+                 -moz-user-select: none;
+                -khtml-user-select: none;
+                user-select: none;               
+            }   
+            tr {
+                 -moz-user-select: none;
+                -khtml-user-select: none;
+                user-select: none;               
+            }  
+        </style>
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script>
+
+     
+        </script>
+        <script>
             $(document).ready(function(){
+            $('div,table,tr,td,span,body').onselectstart = function() { return(false); }; 
+            $('div,table,tr,td,span,body,html').bind("contextmenu", function(e) { e.preventDefault();console.log(e.target);return false; });  
                 var spp_frame = $('#spp_frame').css({
                     'width':250,
-                    'height':277,
+                    'height':300,
                     'border-radius':5,
                     'border':'1px solid #ddd',
-                    'color': '#ddd',
+                    'color': '#ccc',
                     'position':'absolute',
                     'text-align':'center',
-                    'padding':5
+                    'padding':15,
+                    'font-family':'"arial"',
+                    'font-weigth':'100',
+                    'font-variant':'small-caps'
                 });
-                spp_frame.find('div').css({
+                var buttons = spp_frame.find('div:not(.tag)').css({
                     'border':'1px solid #ddd',
                     'border-radius':5,
                     'display':'table-cell',
@@ -27,7 +61,19 @@
                     'font-family':'"arial"',
                     'font-weigth':'bold',
                     'width':250/3.26,
-                    'height':200/3.28
+                    'height':200/3.28,
+                    'font-size':'18px',
+                    '-moz-user-select': 'none',
+                    '-khtml-user-select': 'none',
+                    'user-select': 'none'
+                }).mouseenter(function(){
+                    $(this).css({'background':'#f5f5f5','color':'#eee'}); 
+                }).mouseout(function(){
+                    $(this).css({'background':'#fff','color':'#ccc'});
+                }).click(function(){
+                    var r=Math.floor(Math.random()*10);
+                    $(buttons[r]).css({background:'#e7ffce'});
+                    setTimeout(function(){$(buttons[r]).css({background:'#fff'})},200);
                 });
                 spp_frame.find('table').css({
                     'margin':'auto' 
@@ -43,6 +89,9 @@
                 spp_frame.centerToParent();
                 $(window).resize(function(){
                     spp_frame.centerToParent();
+                });
+                $(window).keyup(function(e){
+                   console.log(e.keyCode); 
                 });
                 console.log($($(spp_frame).children('table')[0]).css({display:'block'}));
                 //.css({display:'block'});
@@ -72,9 +121,10 @@
                 <tr>
                     <td><div>,</div></td>
                     <td><div>0</div></td>
-                    <td><div><-|</div></td>
+                    <td><div>E</div></td>
                 </tr>
             </table>
+            <div class="tag" style="text-align:right;"><span style="font-size:12px;">&copy; secure pinpad</span></div>
         </div>
 
     </body>
