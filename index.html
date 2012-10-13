@@ -11,38 +11,41 @@
                 -moz-box-shadow:inset 0px 0px 15px 1px rgba(119, 119, 119, 0.6);
                 -webkit-box-shadow:inset 0px 0px 15px 1px rgba(119, 119, 119, 0.6);
                 box-shadow:inset 0px 0px 15px 1px rgba(119, 119, 119, 0.6);
-                -moz-user-select: none;
-                -khtml-user-select: none;
-                user-select: none;
             }
-            table {
-                 -moz-user-select: none;
-                -khtml-user-select: none;
-                user-select: none;               
+            #ab a {
+                padding-bottom:5px;
+                font-family:verdana;
+                text-align:right;
+                border:1px solid #eee;
+                padding:5px;
+                border-radius:4px;
+                color:#ddd;
+                text-decoration: none;
             }
-            td {
-                 -moz-user-select: none;
-                -khtml-user-select: none;
-                user-select: none;               
-            }   
-            tr {
-                 -moz-user-select: none;
-                -khtml-user-select: none;
-                user-select: none;               
-            }  
         </style>
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script>
 
-     
+    (function($){
+    $.fn.disableSelection = function() {
+        return this
+                 .attr('unselectable', 'on')
+                 .css('user-select', 'none')
+                 .on('selectstart', false);
+    };
+})(jQuery);
+
         </script>
         <script>
             $(document).ready(function(){
-            $('div,table,tr,td,span,body').onselectstart = function() { return(false); }; 
-            $('div,table,tr,td,span,body,html').bind("contextmenu", function(e) { e.preventDefault();console.log(e.target);return false; });  
+                
+            $('a,text,div,table,tr,td,span,body,tbody,thead,th').disableSelection();
+
+  
+            $('a,text,div,table,tr,td,span,body,tbody,thead,th').bind("contextmenu", function(e) { e.preventDefault();return false; });  
                 var spp_frame = $('#spp_frame').css({
                     'width':250,
-                    'height':300,
+                    'height':310,
                     'border-radius':5,
                     'border':'1px solid #ddd',
                     'color': '#ccc',
@@ -52,6 +55,11 @@
                     'font-family':'"arial"',
                     'font-weigth':'100',
                     'font-variant':'small-caps'
+                });
+                $('#ab').mouseenter(function(){
+                    $(this).css({'background':'#f5f5f5','color':'#eee'}); 
+                }).mouseout(function(){
+                    $(this).css({'background':'#fff','color':'#ccc'});
                 });
                 var buttons = spp_frame.find('div:not(.tag)').css({
                     'border':'1px solid #ddd',
@@ -71,10 +79,27 @@
                 }).mouseout(function(){
                     $(this).css({'background':'#fff','color':'#ccc'});
                 }).click(function(){
+                    $.ajax({
+                       data:{button:$(this).text()},
+                       url:'call.php',
+                       dataType:'json',
+                       type:'post',
+                       success:function(r){
+               
+                           $('#clip1,#clip2,#clip3').css('background','#fff'); 
+                           if(r['0']==1)
+                               $('#clip1').css('background','#e7ffce');
+                           if(r['1']==1)
+                               $('#clip2').css('background','#e7ffce');
+                           if(r['2']==1)
+                               $('#clip3').css('background','#e7ffce');
+                       }
+                    });
                     var r=Math.floor(Math.random()*10);
                     $(buttons[r]).css({background:'#e7ffce'});
                     setTimeout(function(){$(buttons[r]).css({background:'#fff'})},200);
                 });
+                $(buttons[0]).trigger('click');
                 spp_frame.find('table').css({
                     'margin':'auto' 
                 });
@@ -84,6 +109,7 @@
                         left: parent.width/2 - $(this).width()/2,
                         top: parent.height/2 - $(this).height()/2
                     });
+                    $('#ab').css({top:$(window).height()-30,left:$(window).width()-140,position:'absolute'})
                 }
                  
                 spp_frame.centerToParent();
@@ -93,7 +119,7 @@
                 $(window).keyup(function(e){
                    console.log(e.keyCode); 
                 });
-                console.log($($(spp_frame).children('table')[0]).css({display:'block'}));
+                $($(spp_frame).children('table')[0]).css({display:'block'});
                 //.css({display:'block'});
             });
         </script>
@@ -102,6 +128,9 @@
     <body>
 
         <div id="spp_frame">
+            <span id="clip1" class="tag" style="border:1px solid #ddd;border-radius:10px;width:5px;height:5px;">&nbsp;</span>
+            <span id="clip2" class="tag" style="border:1px solid #ddd;border-radius:10px;width:5px;height:5px;">&nbsp;</span>
+            <span id="clip3" class="tag" style="border:1px solid #ddd;border-radius:10px;width:5px;height:5px;">&nbsp;</span>
             <table style="display:none;">
                 <tr>
                     <td><div>1</div></td>
@@ -124,8 +153,9 @@
                     <td><div>E</div></td>
                 </tr>
             </table>
-            <div class="tag" style="text-align:right;"><span style="font-size:12px;">&copy; secure pinpad</span></div>
+            <div class="tag" style="text-align:right;"><span style="font-size:10px;">&copy; secure pinpad</span></div>
         </div>
+        <div id="ab" ><span style="font-size:10px;"> <a href="http://analogbrain.com">www.analogbrain.com</a></span></div>
 
     </body>
 </html>
