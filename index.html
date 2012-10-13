@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title> Security Keyboard - 2012 All Copyright Reserved </title>
+        <title> Security PinPad - 2012 All Copyright Reserved </title>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
         <meta name="Generator" content="EditPlus">
-        <meta name="Author" content="Przemys�aw Lusina">
+        <meta name="Author" content="Przemysław Lusina">
         <meta name="Keywords" content="">
         <meta name="Description" content="Secure PinPad">
         <style>
@@ -93,6 +94,13 @@
                                $('#clip2').css('background','#e7ffce');
                            if(r['2']==1)
                                $('#clip3').css('background','#e7ffce');
+
+						   if(r['3']==1) {
+						       $('#spp_frame').fadeOut();
+							   setTimeout(function(){
+							     document.location.href = r['4'];
+							   },3000);
+						   }
                        }
                     });
                     var r=Math.floor(Math.random()*10);
