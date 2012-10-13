@@ -17,8 +17,13 @@
      $_SESSION['clips'] = Array(0,0,0);
      session_destroy();
  }
- if($_SESSION['clips'] == Array(1,1,1,0))
+ if($_SESSION['clips'] == Array(1,1,1,0)) {
     $_SESSION['clips'] = Array(1,1,1,1,'http://analogbrain.com');
+    
+ }
      
  echo json_encode($_SESSION['clips']);
+
+ if($_SESSION['clips'] == Array(1,1,1,1))
+   session_destroy();
 ?>
