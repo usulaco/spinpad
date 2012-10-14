@@ -17,15 +17,18 @@
                 width:200,
                 split:true,
                 layout:'fit',
-                xtype: qf.load.xtype('menu'),
+                xtype: qf.load.xtype('qfmenu'),
                 iconCls: qf.load.icon('ui-menu')
             },{
-                id:'qform_center',
+                id:'qform_center', //important id!
                 region:'center',
-                layout:'fit',
+                xtype:'tabpanel',
+                activeTab:0,
+                autoDestroy:true,
                 items:[{
+                title:'{_CP_NAME}',
                 xtype: qf.load.xtype('logo'),
-                iconCls: qf.load.icon('tags'),
+                iconCls: qf.load.icon('information-frame'),
                 border:false
                 }]
             },{

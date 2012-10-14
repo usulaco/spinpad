@@ -21,6 +21,12 @@ qf = {
                data:{
                  name:name
                },
+               error:function(){
+                 output = 'error';
+                 qf.comp_err[name] = {
+                    err:'{_COMPONENT_404}: '+ (name || 'empty') 
+                 };
+               },
                success:function(r,n,xr){
                
                qf.ajax_completed(xr,'jquery');
@@ -40,10 +46,11 @@ qf = {
    },
    style:{},
    comp:{},
+   center_tabs:{},
    comp_err:{},
    ajax: {
           notice:function(r,t){
-             console.info('Ajax On Complete',t);
+             //console.info('Ajax On Complete',t);
           }
    },
    ajax_completed: function(r,t){

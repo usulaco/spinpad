@@ -2,6 +2,7 @@ qf.comp.error = Ext.extend(Ext.form.FormPanel,{
         border:false,
         layout:'fit',
         padding:0,
+        title:'<font color="#ff0000">{_COMPONENT_ERROR}</font>',
 	initComponent:function(){   
 	  var _this = this;
               _this.items = [{
