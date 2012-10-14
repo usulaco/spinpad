@@ -6,22 +6,27 @@
                 region:'north',
                 height:100,
                 bbar:['->',{
-                   text:'{_LOGOUT}: <?php echo $this->user->name;?>',
+                   iconCls:qf.load.icon('key--arrow'),
+                   tiptool:'{_LOGOUT}',
+                   text:'<?php echo $this->user->name;?>',
                    handler: function(){document.location.href='qform/logout'}
                 }]
             },{
                 id:'qform_west',
                 region:'west',
                 width:200,
-                split:true
+                split:true,
+                layout:'fit',
+                xtype: qf.load.xtype('menu'),
+                iconCls: qf.load.icon('ui-menu')
             },{
                 id:'qform_center',
                 region:'center',
                 layout:'fit',
                 items:[{
-                 xtype: qf.load.xtype('logo'),
-                 border:false,
-                 text:'<?php echo $this->config->title; ?>'
+                xtype: qf.load.xtype('logo'),
+                iconCls: qf.load.icon('tags'),
+                border:false
                 }]
             },{
                 id:'qform_east',

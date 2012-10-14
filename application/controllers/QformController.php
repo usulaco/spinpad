@@ -67,7 +67,7 @@ class QformController extends Zend_Controller_Action {
      */
 
     public function loginAction() {
-        
+        $this->view->init_javascript = $this->QFormJavaScript->getScript('init');
     }
 
     /*
@@ -83,7 +83,10 @@ class QformController extends Zend_Controller_Action {
      */
 
     public function loadmenuAction() {
-      return  $this->QFormInterface->getMenu($this->_request->getPost('menu_id'));
+     if($this->_request->isXmlHttpRequest()) 
+      echo $this->QFormInterface->getMenu($this->_request->getPost('menu_id'));
+       else
+         throw new Zend_Controller_Action_Exception('Only ajax call allowed.', 404);
     }
 
     /*

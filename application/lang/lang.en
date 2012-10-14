@@ -56,3 +56,9 @@
 {_HOME}:Home
 {_ERROR_USERNAME_OR_PASSWORD}:Error username or password
 {_WARNING}:Warning
+{_FORMS}:Forms
+{_PAGES}:Pages
+{_MENU_EDITOR}:Menu editor
+{_FOLDERS}:Folders
+{_ADMINISTRATION}:Administration
+{_CP_NAME}:QForm

@@ -3,10 +3,10 @@ qf.comp.logo = Ext.extend(Ext.form.FormPanel,{
         layout:'fit',
         padding:0,
         text:'QForm',
-        logoHeight:30,
+        logoHeight:20,
 	initComponent:function(){   
 	  var _this = this;
-              _this.items = [{
+              _this.items = [new Ext.Panel({
                   xtype:'panel',
                   layout:'fit',
                   bodyStyle:{
@@ -18,7 +18,7 @@ qf.comp.logo = Ext.extend(Ext.form.FormPanel,{
                         'font-size':'11px',
                         'border':'0px'
                   },
-                  html: '<div style="text-align:center;"><div style="cursor:pointer;padding-top:15px;border-radius:4px;border:1px solid #ddd;height:'+_this.logoHeight+'px;width:150px;margin:auto;">'+_this.text+'</div></div>',
+                  html: '<div style="text-align:center;"><div style="cursor:pointer;line-height:2;border-radius:4px;border:1px solid #ddd;width:150px;margin:auto;">'+_this.text+'</div></div>',
                   listeners:{
                       afterrender:function(){
                          $($(this.body.dom).find('div')[1]).mouseenter(function(){
@@ -27,9 +27,9 @@ qf.comp.logo = Ext.extend(Ext.form.FormPanel,{
                              $(this).css({'background':'#FFF',color:'#ddd'}); 
                          });
                          
-                      }
+                     }
                   }
-              }];
+              })];
           qf.comp.logo.superclass.initComponent.call(this);
 	} 
 });

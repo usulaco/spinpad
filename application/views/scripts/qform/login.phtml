@@ -26,6 +26,7 @@ new Ext.Viewport({
         region:'west',
         width:250,
         title:'{_MENU}',
+        iconCls:qf.load.icon('ui-menu'),
         layout:'vbox',
         layoutConfig:{
            align:'stretch',
@@ -37,6 +38,7 @@ new Ext.Viewport({
            height:130,
            border:false,
            layout:'form',
+           iconCls: qf.load.icon('key-solid'),
            padding:5,
            items:[{
               fieldLabel:'{_USERNAME}',
@@ -66,9 +68,11 @@ new Ext.Viewport({
            }],
            buttons:[{
                text:'{_HOME}',
+               iconCls: qf.load.icon('home'),
                handler: function(){document.location.href = '/'}
            },{
                text:'{_LOGIN}',
+               iconCls: qf.load.icon('key'),
                handler: login
            }]
         }]
